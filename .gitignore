@@ -7,4 +7,3 @@ static/Images/
 static/uploads/
 *.h5
 !best_InceptionResnetV2.h5
-!best_InceptionResnetV2_linux.h5
