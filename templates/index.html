@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>a-paw-calpyse</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sacramento&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4231346c72.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+
+<body>
+    <div class="top-container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="">a-<i class="fa fa-paw"></i>-calypse</a>
+                <ul class="navbar-nav ml-auto">
+
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#About">About Us</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Introduction">Introduction</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#KYD">Know Your Data</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Performance">Performance</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tryItOut">Try it out</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact-me">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <h1 class="text-center">a-<i class="fa fa-paw"></i>-calypse</h1>
+    </div>
+
+    <hr>
+    <div class="city-row" id="About">
+        <h2 class="text-center">About us</h2>
+        <p>This project is is done by a group of four members:
+        <ol>
+            <li>Aryaman Gautam (J001)</li>
+            <li>Aayushmaan Jain (J022)</li>
+            <li>Pratyush Patro (J047)</li>
+            <li>Milindi Shah (J057)</li>
+        </ol>
+        </p>
+    </div>
+    <hr>
+
+    <div class="city-row" id="Introduction">
+        <h2 class="text-center">Introduction</h2>
+        <p>
+            We see that many dogs are abandoned by the owners who couldn't take care of their dogs due to some reason,
+            and abandon them,
+            and the abandoned dogs are forced to live on the streets facing hunger, cold and unfriendly locals who
+            sometimes get scared and hurt them.
+            Being dog lovers, we aim to solve this problem with our project a-<i class="fa fa-paw"></i>-calypse which uses deep learning to identify
+            dog breeds and alert the NGO
+            so that they can rescue the dog and the dog can find a new home
+            <br>
+            So basically...... This image does a good job in summarizing what we do.
+        </p>
+        <img src="https://miro.medium.com/max/1200/1*7uOeqRpINSjUoP0JNQV0JQ.jpeg" alt="flowchart" height="400px"
+            width="800px" class="mx-auto">
+    </div>
+    <hr>
+    <div class="city-row" id="KYD">
+        <h2 class="text-center">Know Your Data</h2>
+        The dataset used in this project is sourced from Kaggle which is the <a
+            href="https://www.kaggle.com/c/dog-breed-identification/data">Dog Breed Identification dataset</a>
+        Since the data did not have a dedicated test set with labels, we had to do a split while performing data
+        augmentation where we had 80% of the data in the train set and 10% of the data in the validation set and 10% of the data in test set.
+        We also performed certain data augmentations on the dataset which are:
+        <ol>
+            <li>
+                Resizing - We have resized all the images to 256,256 pixels so as to not diminish the image size which
+                may result in loss of feautures and clarity and not big enough to increase the number of parameters in
+                our model. This size is also the input size for many pre trained models which eases the training of
+                models.
+            </li>
+            <li>
+                Rescaling - We rescaled the pixels of the images to be in between 0 and 1 so that our model can converge
+                faster
+            </li>
+            <li>Shearing - We performed shearing on the dataset to accomodate the shaking of the device which may have
+                occured while clicking the photos. We kept the shearing co efficient to a low value of 0.2 so as to not
+                distort the training data in such a way that the model cannot learn the features properly
+            </li>
+            <li>
+                Zoom - We implemented the zooming augmentation to accomodate the varying distances from which the user
+                can take photos, we have set the zoom range from 0.8x to 1.2x so as to not hamper the training data but
+                adjust for slightly varying distances while taking the photo of the dog
+            </li>
+            <li>
+                Horizontal flip - We have implemented the horizontal flip augmentation as the user may take the picture
+                from the front or behind where the left and right sides may get flipped and to accomodate that we have
+                implemented the horizontal flip data augmentation
+            </li>
+        </ol>
+        Top 20 most occuring breeds in the dataset <br>
+        <img src="static/Images/newplot.png" alt="Proportion of data in train and test sets" height="400px" width="1000px">
+    </div>
+    <hr>
+    <div class="city-row" id="Performance">
+        <h2 class="text-center">Performance</h2>
+        And, our model performed well on all the sets,the accuracies are:<br>
+        <table class="table">
+            <tr>
+                <th scope="col">Dataset</td>
+                <th scope="col">Accuracy</td>
+            </tr>
+            <tr>
+                <td>Train</td>
+                <td>82.15%</td>
+            </tr>
+            <tr>
+                <td>Validation</td>
+                <td>75.25%</td>
+            </tr>
+            <tr>
+                <td>Test</td>
+                <td>78.57%</td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div class="city-row" id="tryItOut">
+        <h2 class="text-center">Try it out</h2>
+        If you are impressed with our performance and would like to try out our model, then please click the button
+        below to upload the details about the dog and get the predictions
+        <div class="predictButton" id="predict">
+            <a class="btn btn-dark predictButton" href="{{url_for('getData')}}">PREDICT</a>
+        </div>
+    </div>
+
+    <div class="contact-me" id="contact-me">
+        <h2>Get In Touch</h2>
+        <h3>Contact Us</h3>
+        <p class="contact">You can contact me via the button given below. Feel free to contact me. <br>
+            Suggestions and corrections are welcomed warmly by me.</p>
+        <a class="btn btn-dark" href="mailto:aayushmaan1306@gmail.com">CONTACT US</a>
+    </div>
+    <div class="bottom-container">
+        <p class="copyright">© a-<i class="fa fa-paw"></i>-calypse</p>
+        <p class="copyright">
+            Aryaman Gautam
+        </p>
+        <p class="copyright">
+            Aayushmaan Jain
+        </p>
+        <p class="copyright">
+            Pratyush Patro
+        </p>
+        <p class="copyright">
+            Milindi Shah
+        </p>
+        <i class="fas fa-map-pin copyright"></i>
+        <p class="copyright"><a href="https://goo.gl/maps/M8wmQpq5xBob3Ujp7" class="footer-link">Mumbai, MH</a></p>
+    </div>
+
+</body>
+
+</html>
